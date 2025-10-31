@@ -27,7 +27,7 @@ const BgSlider = () => {
               key={index === i ? `active-${Date.now()}` : `inactive-${i}`}
               src={src}
               style={{
-                filter: "grayscale(1) brightness(0.65) contrast(1.4)",
+                filter: "grayscale(1) brightness(0.65) contrast(1)",
               }}
               alt=""
               className={`w-full h-full object-cover transform scale-110 ${

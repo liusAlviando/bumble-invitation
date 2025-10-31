@@ -21,7 +21,7 @@ const BottomMenuItem = ({ icon, text , img , to , isActive}) => {
 const HomeLayout = () => {
   const [pageTitle , setPageTitle] = useState('Bumble')
   return (
-    <div className="bg-zinc-100 flex justify-center min-h-screen">
+    <div className="bg-zinc-100 flex justify-center min-h-screen overflow-hidden">
         <div className="flex flex-col h-screen w-screen md:w-[400px] relative bg-white">
             <div className="px-4 pt-2 flex justify-between items-center">
               <div className={`${pageTitle == 'Bumble' ? 'font-bold' : 'font-normal'} text-[20pt]`}>
@@ -34,7 +34,7 @@ const HomeLayout = () => {
             <div className="h-full">
               <Outlet context={{setPageTitle}} />
             </div>
-            <div className="fixed bg-white bottom-0 left-0 right-0 mx-auto w-screen md:w-[400px] h-[70px] flex justify-around items-center z-[10] rounded-t-xl">
+            <div className="cursor-pointer fixed bg-white bottom-0 left-0 right-0 mx-auto w-screen md:w-[400px] h-[70px] flex justify-around items-center z-[10] rounded-t-xl">
               <div>
                 <BottomMenuItem
                   text={'Profile'}
@@ -65,7 +65,7 @@ const HomeLayout = () => {
               </div>
               <div>
                 <BottomMenuItem
-                  text={'Chats'}
+                  text={'RSVP'}
                   icon={faMessage}
                   to={'/chats'}
                 />

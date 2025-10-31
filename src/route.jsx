@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { useRoutes } from 'react-router-dom';
 import Basic from './layouts/Basic';
 import HomeLayout from './layouts/HomeLayout';
+import Loader from './components/Loader';
 
 const Welcome = lazy(() => import('./pages/Welcome'));
 const Home = lazy(() => import('./pages/Home'));
@@ -59,7 +60,7 @@ const RouterIndex = () => {
   ]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader />}>
       {routes}
     </Suspense>
   );
