@@ -21,11 +21,11 @@ const Location = () => {
             <br></br>
             <br></br>
             <div className="bg-primary rounded-lg p-3">
-                <div>28 December 2025</div>
-                <div>Holy Matrimony</div>
+                <div className="font-bold text-lg text-wh">28th December 2025</div>
+                <div className="font-semibold">Holy Matrimony</div>
                 <div>10:30 - 12:00</div>
                 <br></br>
-                <div>Wedding Ceremony</div>
+                <div className="font-semibold">Wedding Ceremony</div>
                 <div>13:00 - 15:00</div>
             </div>
             <br></br>

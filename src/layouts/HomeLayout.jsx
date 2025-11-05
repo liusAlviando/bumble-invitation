@@ -27,9 +27,9 @@ const HomeLayout = () => {
               <div className={`${pageTitle == 'Bumble' ? 'font-bold' : 'font-normal'} text-[20pt]`}>
                 {pageTitle}
               </div>
-              <Link to={'/present'}>
+              {/* <Link to={'/present'}>
                 <FontAwesomeIcon className="text-[15pt]" icon={faGift}></FontAwesomeIcon>
-              </Link>
+              </Link> */}
             </div>
             <div className="h-full">
               <Outlet context={{setPageTitle}} />

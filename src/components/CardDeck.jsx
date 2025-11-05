@@ -3,19 +3,24 @@ import { motion, AnimatePresence ,useTransform, useMotionValue} from 'framer-mot
 import verified from '../assets/verified.png'
 import { Link, useNavigate } from 'react-router-dom';
 
+import bg3 from '../assets/bg3.jpg'
+import video from '../assets/video.mp4'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import VideoPlayer from './VideoPlayer';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 const CardLayout = ({title,children}) =>{
     return(
         <div className='shadow-lg rounded-xl p-2 mt-2'>
-            <div className='font-[600]'>{title}</div>
+            <div className='font-[600] mb-2'>{title}</div>
             <div>{children}</div>
         </div>
     )
 }
 
-const Pill = ({body}) =>{
+const Pill = ({children}) =>{
     return(
-        <div>
-            <div>{body}</div>
+        <div className='text-sm rounded-full border-1 border-zinc-500 px-2 py-1'>
+            <div>{children}</div>
         </div>
     )
 }
@@ -24,7 +29,7 @@ const Pill = ({body}) =>{
 const sampleProfiles = [
   {
     id: 1,
-    img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=60',
+    img: bg3,
     text: 
     <div>
         <div className='text-[23pt] font-bold flex items-center'>
@@ -42,17 +47,38 @@ const sampleProfiles = [
         <CardLayout
             title={'Our bio'}
         >
-            asdada
+          <div>
+            Simple hearts, endless giggles~
+          </div>
+          <div>
+            <VideoPlayer video={video} thumbnail={bg3} />
+          </div>
         </CardLayout>
         <CardLayout
             title={'Our interest'}
         >
-            asdada
+            <div className='flex flex-wrap space-x-2 space-y-2 w-full'>
+              <Pill>Movie</Pill>
+              <Pill>Trip</Pill>
+              <Pill>Sushi</Pill>
+              <Pill>Pork Belly</Pill>
+              <Pill>Cheese Cake</Pill>
+              <Pill>Noodle</Pill>
+              <Pill>Cafe Hopping</Pill>
+              <Pill>80s Music</Pill>
+              <Pill>Catholic</Pill>
+              <div></div>
+            </div>
         </CardLayout>
         <CardLayout
             title={'We\'re looking for'} 
         >
-            asdada
+            <div className='flex flex-wrap space-x-2 space-y-2 w-full'>
+              <Pill>Forever Lasting Mariage</Pill>
+              <Pill>Children</Pill>
+              <Pill>Wealth & Fortune</Pill>
+              <div></div>
+            </div>
         </CardLayout>
     </div>,
   }
@@ -250,102 +276,109 @@ export default function CardDeck({ items = sampleProfiles, onSwipe }) {
           )}
         </div>
         <AnimatePresence>
-      {isMatched && (
+  {isMatched && (
+    <motion.div
+      key="match"
+      className="absolute top-0 left-0 w-full h-full bg-primary z-[100] flex flex-col items-center justify-center overflow-hidden"
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      exit={{ y: "100%" }}
+      transition={{ type: "spring", stiffness: 70, damping: 15 }}
+    >
+      {/* Floating hearts layer */}
+      {showHearts && (
         <motion.div
-          key="match"
-          className="absolute top-0 left-0 w-full h-full bg-primary z-[100] flex flex-col items-center justify-center overflow-hidden"
-          initial={{ y: "100%" }}
-          animate={{ y: 0 }}
-          exit={{ y: "100%" }}
-          transition={{ type: "spring", stiffness: 70, damping: 15 }}
+          className="absolute inset-0 pointer-events-none overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
         >
-          {/* Floating hearts layer */}
-          {showHearts && (
+          {[...Array(15)].map((_, i) => (
             <motion.div
-              className="absolute inset-0 pointer-events-none overflow-hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              key={i}
+              className="absolute text-white text-2xl"
+              style={{
+                left: `${Math.random() * 100}%`,
+                bottom: `${Math.random() * 20}%`,
+              }}
+              initial={{ y: 0, opacity: 0, scale: 0.8 }}
+              animate={{
+                y: -600 - Math.random() * 400,
+                opacity: [0, 1, 0],
+                scale: [0.8, 1.2, 1],
+                rotate: Math.random() * 60 - 30,
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                delay: Math.random() * 0.5,
+                repeat: Infinity,
+                ease: "easeOut",
+              }}
             >
-              {[...Array(15)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute text-white text-2xl"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    bottom: `${Math.random() * 20}%`,
-                  }}
-                  initial={{ y: 0, opacity: 0, scale: 0.8 }}
-                  animate={{
-                    y: -600 - Math.random() * 400,
-                    opacity: [0, 1, 0],
-                    scale: [0.8, 1.2, 1],
-                    rotate: Math.random() * 60 - 30,
-                  }}
-                  transition={{
-                    duration: 3 + Math.random() * 2,
-                    delay: Math.random() * 0.5,
-                    repeat: Infinity,
-                    ease: "easeOut",
-                  }}
-                >
-                  💛
-                </motion.div>
-              ))}
+              💛
             </motion.div>
-          )}
-
-          {/* BOOM! */}
-          <motion.div
-            className="text-white text-[35pt] font-bold tracking-widest z-10"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: [0, 1.3, 1], opacity: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            BOOM!
-          </motion.div>
-
-          {/* it's a match */}
-          <motion.div
-            className="text-white font-semibold text-[20pt] mt-[-10px] z-10"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-          >
-            it’s a match!
-          </motion.div>
-
-          {/* profile images */}
-          <motion.div
-            className="flex mt-6 z-10"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.7, type: "spring", stiffness: 120 }}
-          >
-            <motion.div
-              className="rounded-full w-[90px] h-[90px] bg-zinc-100 flex items-center justify-center mr-3"
-              whileHover={{ scale: 1.05 }}
-            />
-            <motion.div
-              className="rounded-full w-[90px] h-[90px] bg-zinc-100 flex items-center justify-center"
-              whileHover={{ scale: 1.05 }}
-            />
-          </motion.div>
-
-          {/* Button */}
-
-          <motion.div
-            className="cursor-pointer bg-white rounded-xl px-4 py-2 mt-6 text-sm font-semibold z-10"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            whileHover={{ scale: 1.1 }}
-            onClick={()=>{navigate('/chats')}}
-          >
-            Go to RSVP
-          </motion.div>
+          ))}
         </motion.div>
       )}
-    </AnimatePresence>
+
+      {/* BOOM! */}
+      <motion.div
+        className="text-white text-[35pt] font-bold tracking-widest z-10"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: [0, 1.3, 1], opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        BOOM!
+      </motion.div>
+
+      {/* it's a match */}
+      <motion.div
+        className="text-white font-semibold text-[20pt] mt-[-10px] z-10"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+      >
+        it’s a match!
+      </motion.div>
+
+      {/* profile images with love animation */}
+      <div className="relative flex mt-6 z-10 items-center justify-center">
+        <motion.div
+          className="rounded-full w-[90px] h-[90px] bg-zinc-100 flex items-center justify-center mr-6"
+          initial={{ x: -150, rotate: -20 }}
+          animate={{ x: 0, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 120, damping: 10 }}
+        />
+        <motion.div
+          className="rounded-full w-[90px] h-[90px] bg-zinc-100 flex items-center justify-center ml-6"
+          initial={{ x: 150, rotate: 20 }}
+          animate={{ x: 0, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 120, damping: 10 }}
+        />
+        {/* Love heart in the middle */}
+        <motion.div
+          className="absolute text-3xl text-yellow-800"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: [0, 1.5, 1], opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.6, type: "tween", ease: "easeOut" }}
+        >
+          <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
+        </motion.div>
+      </div>
+
+      {/* Button */}
+      <motion.div
+        className="cursor-pointer bg-white rounded-xl px-4 py-2 mt-6 text-sm font-semibold z-10"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        whileHover={{ scale: 1.05 }}
+        onClick={() => { navigate('/location'); }}
+      >
+        Check Date & Location
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
         
       </div>
     );

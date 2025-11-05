@@ -1,6 +1,10 @@
+import ChatBumble from "../components/ChatBumble"
+
 const Chats = () => {
     return (
-        <div>Chats</div>
+        <div className="h-full pb-[120px]">
+            <ChatBumble></ChatBumble>
+        </div>
     )
 }
 
