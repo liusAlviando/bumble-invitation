@@ -5,8 +5,33 @@ import { faEnvelope, faHeart } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 import logo_bumble from '../assets/logo-bumble.png'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 const Welcome = () => {
+  const [getParams,setParams] = useSearchParams()
+  const [loading, setLoading] = useState(false)
+  const [attendance, setAttendance] = useState({})
+
+  function checkAttendance(slug){
+    setLoading(true)
+    axios.get(`https://api.cause.monster/api-invitation/attendance/${slug}`)
+    .then(res=>{
+      setAttendance(res.data.data)
+      //set expires in 20min
+      localStorage.setItem('slug', slug)
+      localStorage.setItem('full_name', res.data.data.full_name)
+      localStorage.setItem('expires', new Date(Date.now() + 20*60*1000).toISOString())
+      setLoading(false)
+    }).catch(err=>{
+      setLoading(false)
+    })
+  }
+  useEffect(()=>{
+    if(getParams.get('to') != '' && getParams.get('to') != undefined && getParams.get('to') != null){
+      checkAttendance(getParams.get('to'))
+    }
+  },[])
   return (
     <div className="relative">
         <div className='absolute top-0 left-0 w-full h-full'>
@@ -26,19 +51,54 @@ const Welcome = () => {
               <div className='text-[15pt]'>Wedding Invitation</div>
             </div>
             <div className='pb-[10%] w-full flex flex-col items-center justify-center'>
-              
-              <div>
+              {
+                loading ? <>
+                <div className='font-[600] text-[20pt]'>
+                  Please Wait
+                </div>
+                </>: <>
+                {
+                !getParams.get('to') || attendance.full_name == undefined ? 
+
+                <>
+                <div className='font-[600] text-[20pt]'>
+                  Invalid Invitation
+                </div>
+                <div>
+                  Please reach us personally :)
+                </div>
+                </>:
+                <>
+                <div>
                 Hello,
-              </div>
-              <div className='font-[600] text-[20pt]'>
-                Yohana Merina
-              </div>
-              <div className='mb-4'>
-                You are invited!
-              </div>
-              <Link to={'/home'} className='cursor-pointer text-black bg-zinc-100 w-full flex items-center justify-center py-3 rounded-xl'>
-                  Open Invitation
-              </Link>
+                </div>
+                <div className='font-[600] text-[20pt]'>
+                  {attendance.full_name}
+                </div>
+                {
+                  attendance.plus_one == 1 &&
+                  <div className='mb-4'>
+                    And Partner
+                  </div>
+                }
+                {
+                  attendance.plus_one == 2 &&
+                  <div className='mb-4'>
+                    And Fams
+                  </div>
+                }
+                <div className='mb-4'>
+                  You are invited!
+                </div>
+                <Link to={'/home'} className='cursor-pointer text-black bg-zinc-100 w-full flex items-center justify-center py-3 rounded-xl'>
+                    Open Invitation
+                </Link>
+                </>
+              }
+                </>
+              }
+              
+              
             </div>
 
           </div>

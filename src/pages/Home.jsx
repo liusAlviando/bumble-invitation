@@ -12,6 +12,21 @@ const Home = () => {
         setPageTitle('Bumble')
         setOnboarding(true)
     },[])
+
+    useEffect(() => {
+      // Auto hide after 2.5s
+      const t = setTimeout(() => setOnboarding(false), 2500);
+  
+      // Hide if user scrolls
+      const hideOnScroll = () => setOnboarding(false);
+      window.addEventListener("scroll", hideOnScroll);
+  
+      return () => {
+        clearTimeout(t);
+        window.removeEventListener("scroll", hideOnScroll);
+      };
+    }, []);
+  
   return (
     <div className="flex flex-col items-center w-full h-full">
         {onboarding && (
@@ -19,7 +34,7 @@ const Home = () => {
     onClick={() => {
       setOnboarding(false);
     }}
-    className="cursor-pointer absolute top-0 left-0 w-full h-full bg-black opacity-60 z-[100] flex flex-col items-center justify-center text-center px-4"
+    className="pointer-events-none absolute top-0 left-0 w-full h-full bg-black opacity-60 z-[100] flex flex-col items-center justify-center text-center px-4"
   >
     <motion.img
       className="w-[150px]"

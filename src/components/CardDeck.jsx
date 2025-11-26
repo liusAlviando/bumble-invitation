@@ -80,6 +80,28 @@ const sampleProfiles = [
               <div></div>
             </div>
         </CardLayout>
+        <CardLayout
+            title={'Our Story'}
+        >
+            Yes, we met in Bumble!
+            We never expected that one simple swipe on Bumble would lead us here. At first, it was just two strangers sending messages on a screen until the conversation stopped being small talk and turned into “wait… why do you think exactly like me?”
+            <br></br>
+            <br></br>
+            It didn’t take long for us to realize we shared the same way of having fun: we both love making jokes that are a little too silly, laughing at things no one else would understand, and just enjoying life in the most unexpected ways. So after a few conversations (and way too many jokes), we decided to meet in real life.
+            <br></br>
+            <br></br>
+            From that first meeting, everything felt natural, easy, warm, and oddly familiar, like we’d known each other long before the app ever existed. What began as playful chats slowly grew into something sincere and steady.
+            <br></br>
+            <br></br>
+            Two years passed, full of inside jokes, shared dreams, and countless moments that made us say, “maybe this is it.” So we chose to take another step. We got engaged, with hearts full of joy and a future we’re excited to build.
+            <br></br>
+            <br></br>
+            Now here we are: ready for a more serious chapter, but still laughing, still fun, and still choosing each other, just like that first swipe.
+            <br></br>
+            <br></br>
+            <span className='font-semibold'>Together, we’ll keep the jokes, the love, and the adventure going.</span>
+            
+        </CardLayout>
     </div>,
   }
 ];
@@ -314,22 +336,10 @@ export default function CardDeck({ items = sampleProfiles, onSwipe }) {
                 ease: "easeOut",
               }}
             >
-              💛
             </motion.div>
           ))}
         </motion.div>
       )}
-
-      {/* BOOM! */}
-      <motion.div
-        className="text-white text-[35pt] font-bold tracking-widest z-10"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: [0, 1.3, 1], opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        BOOM!
-      </motion.div>
-
       {/* it's a match */}
       <motion.div
         className="text-white font-semibold text-[20pt] mt-[-10px] z-10"
@@ -337,28 +347,28 @@ export default function CardDeck({ items = sampleProfiles, onSwipe }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.5 }}
       >
-        it’s a match!
+        YOU MATCHED!
       </motion.div>
 
       {/* profile images with love animation */}
       <div className="relative flex mt-6 z-10 items-center justify-center">
         <motion.div
-          className="rounded-full w-[90px] h-[90px] bg-zinc-100 flex items-center justify-center mr-6"
-          initial={{ x: -150, rotate: -20 }}
-          animate={{ x: 0, rotate: 0 }}
+          className="rounded-md w-[120px] h-[160px] bg-zinc-100 flex items-center justify-center mr-6"
+          initial={{ x: -150, rotate: -40, translateX:-40 }}
+          animate={{ x: 0, rotate: -20,translateX: 30 }}
           transition={{ type: "spring", stiffness: 120, damping: 10 }}
         />
         <motion.div
-          className="rounded-full w-[90px] h-[90px] bg-zinc-100 flex items-center justify-center ml-6"
-          initial={{ x: 150, rotate: 20 }}
-          animate={{ x: 0, rotate: 0 }}
+          className="rounded-md w-[120px] h-[160px] bg-zinc-100 flex items-center justify-center ml-6"
+          initial={{ x: 150, rotate: 40, translateX: 40 }}
+          animate={{ x: 0, rotate: 20, translateX:-30 }}
           transition={{ type: "spring", stiffness: 120, damping: 10 }}
         />
         {/* Love heart in the middle */}
         <motion.div
-          className="absolute text-3xl text-yellow-800"
+          className="absolute text-3xl text-yellow-800 bg-primary rounded-full w-[60px] h-[60px] flex items-center justify-center"
           initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: [0, 1.5, 1], opacity: 1 }}
+          animate={{ scale: [0, 1.5, 1], opacity: 1, translateY:30 }}
           transition={{ delay: 0.6, duration: 0.6, type: "tween", ease: "easeOut" }}
         >
           <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>

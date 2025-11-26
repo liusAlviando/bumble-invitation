@@ -10,9 +10,9 @@ const Location = () => {
         setPageTitle('Location')
     },[])
   return (
-    <div className="flex flex-col items-center w-full h-full px-4">
+    <div className="flex flex-col items-center w-full h-full px-4 overflow-y-auto">
 
-        <div className="pb-[70px]">
+        <div className="">
             <div>
             We can’t wait to celebrate this special day with you!
             <br></br>
@@ -24,14 +24,18 @@ const Location = () => {
                 <div className="font-bold text-lg text-wh">28th December 2025</div>
                 <div className="font-semibold">Holy Matrimony</div>
                 <div>10:30 - 12:00</div>
+                <div className="font-semibold"><span className="w-[100px]"><FontAwesomeIcon icon={faMapMarkerAlt} className="text-[15pt]"></FontAwesomeIcon> Gereja Katolik Paroki Gembala Baik</span></div>
                 <br></br>
                 <div className="font-semibold">Wedding Ceremony</div>
                 <div>13:00 - 15:00</div>
+                <div className="font-semibold"><span className="w-[100px]"><FontAwesomeIcon icon={faMapMarkerAlt} className="text-[15pt]"></FontAwesomeIcon> Camping Ground Gereja Katolik Paroki Gembala Baik</span></div>
             </div>
             <br></br>
-            <span className="w-[100px]"><FontAwesomeIcon icon={faMapMarkerAlt} className="text-[15pt]"></FontAwesomeIcon> Gereja Katolik Paroki Gembala Baik</span>
+            {/* <span className="w-[100px]"><FontAwesomeIcon icon={faMapMarkerAlt} className="text-[15pt]"></FontAwesomeIcon> Gereja Katolik Paroki Gembala Baik</span> */}
+            
             <br></br>
-            <div className="text-sm ml-[30px]">Jl. Ridwan No.16, RT./RW:/RW.02/05, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur</div>
+            <div className="ml-[10px] font-semibold">Detailed Location:</div>
+            <div className="text-sm ml-[20px]">Jl. Ridwan No.16, RT./RW:/RW.02/05, Ngaglik, Kec. Batu, Kota Batu, Jawa Timur</div>
             </div>
             <div className="mt-5">
                 <MapEmbed />
