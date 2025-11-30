@@ -123,18 +123,59 @@ const ChatBumble = () => {
 
     // Next questions
     if (phase === 1 && q === "question1") {
-      setTimeout(() => {
-        setChat((prev) => [
-          ...prev,
-          {
-            id: prev.length + 1,
-            from: "A",
-            text: "How many people will attend?",
-            time: getTime(),
-          },
-        ]);
-      }, 600);
-    } else if (phase === 1 && q === "question2") {
+      // If NOT attending → skip to send directly
+      if (value === "Not Attending") {
+        setPhase(2);
+        const req = {
+          event: value,
+          person: 0,
+          slug: localStorage.getItem("slug"),
+        };
+        sendAnswer(req);
+    
+        setTimeout(() => {
+          setChat((prev) => [
+            ...prev,
+            {
+              id: prev.length + 1,
+              from: "A",
+              text: "Thank you for letting us know 💛",
+              time: getTime(),
+            },
+            {
+              id: prev.length + 2,
+              from: "A",
+              component: (
+                <div className="mt-2">
+                  <Present />
+                </div>
+              ),
+              time: getTime(),
+            },
+            {
+              id: prev.length + 3,
+              from: "A",
+              text: "You can also leave us a message if you'd like:",
+              time: getTime(),
+            },
+          ]);
+        }, 800);
+      } else {
+        // 👇 Normal flow if attending
+        setTimeout(() => {
+          setChat((prev) => [
+            ...prev,
+            {
+              id: prev.length + 1,
+              from: "A",
+              text: "How many people will attend?",
+              time: getTime(),
+            },
+          ]);
+        }, 600);
+      }
+    }
+     else if (phase === 1 && q === "question2") {
       setPhase(2);
       const req = {
         event: newAnswers.question1,
@@ -262,7 +303,7 @@ const ChatBumble = () => {
           >
             {chat[chat.length - 1].text.includes("wedding ceremony") && (
               <div className="flex flex-col space-y-1">
-                {["Holy Matrimony", "Wedding Ceremony", "Both"].map((choice) => (
+                {["Holy Matrimony", "Wedding Ceremony", "Both", "Not Attending"].map((choice) => (
                   <button
                     key={choice}
                     onClick={() => handleAnswer("question1", choice)}

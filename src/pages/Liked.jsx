@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 const Liked = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const {setPageTitle} = useOutletContext()
 
   function getMessages() {
     axios
@@ -20,6 +21,7 @@ const Liked = () => {
   }
 
   useEffect(() => {
+    setPageTitle("Liked");
     setLoading(true);
     getMessages();
 

@@ -8,11 +8,12 @@ import logo_bumble from '../assets/logo-bumble.png'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useAudioPlayer } from '../hooks/useAudioPlayer'
 const Welcome = () => {
   const [getParams,setParams] = useSearchParams()
   const [loading, setLoading] = useState(false)
   const [attendance, setAttendance] = useState({})
-
+  const {play} = useAudioPlayer()
   function checkAttendance(slug){
     setLoading(true)
     axios.get(`https://api.cause.monster/api-invitation/attendance/${slug}`)
@@ -90,7 +91,7 @@ const Welcome = () => {
                 <div className='mb-4'>
                   You are invited!
                 </div>
-                <Link to={'/home'} className='cursor-pointer text-black bg-zinc-100 w-full flex items-center justify-center py-3 rounded-xl'>
+                <Link onClick={play} to={'/home'} className='cursor-pointer text-black bg-zinc-100 w-full flex items-center justify-center py-3 rounded-xl'>
                     Open Invitation
                 </Link>
                 </>

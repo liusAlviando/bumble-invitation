@@ -1,9 +1,11 @@
 import { faCompass, faHeart, faMessage, faUser } from "@fortawesome/free-regular-svg-icons"
-import { faGift } from "@fortawesome/free-solid-svg-icons"
+import { faGift, faPause, faPlay } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, Outlet } from "react-router-dom"
 import logo_bumble from '../assets/logo-bumble.png'
 import { useState } from "react"
+import { useAudioState } from "../hooks/useAudioState"
+import { useAudioPlayer } from "../hooks/useAudioPlayer"
 
 const BottomMenuItem = ({ icon, text , img , to , isActive}) => {
   return (
@@ -20,6 +22,9 @@ const BottomMenuItem = ({ icon, text , img , to , isActive}) => {
 }
 const HomeLayout = () => {
   const [pageTitle , setPageTitle] = useState('Bumble')
+  const { isPlaying, progress, duration } = useAudioState();
+  const { toggle } = useAudioPlayer()
+
   return (
     <div className="bg-zinc-100 flex justify-center min-h-screen overflow-hidden">
         <div className="flex flex-col h-screen w-screen md:w-[400px] relative bg-white">
@@ -27,9 +32,10 @@ const HomeLayout = () => {
               <div className={`${pageTitle == 'Bumble' ? 'font-bold' : 'font-normal'} text-[20pt]`}>
                 {pageTitle}
               </div>
-              {/* <Link to={'/present'}>
-                <FontAwesomeIcon className="text-[15pt]" icon={faGift}></FontAwesomeIcon>
-              </Link> */}
+              
+              <div onClick={toggle} to={'/present'} className="cursor-pointer">
+                <FontAwesomeIcon className="text-[15pt]" icon={isPlaying ? faPause : faPlay}></FontAwesomeIcon>
+              </div>
             </div>
             <div className="h-full">
               <Outlet context={{setPageTitle}} />

@@ -4,10 +4,15 @@ import verified from '../assets/verified.png'
 import { Link, useNavigate } from 'react-router-dom';
 
 import bg3 from '../assets/bg3.jpg'
+import videothumb from '../assets/videothumb.webp'
+
 import video from '../assets/video.mp4'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import VideoPlayer from './VideoPlayer';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
+import splitLius from '../assets/splitlius.webp'
+import splitYohana from '../assets/splityohana.webp'
 const CardLayout = ({title,children}) =>{
     return(
         <div className='shadow-lg rounded-xl p-2 mt-2'>
@@ -42,7 +47,7 @@ const sampleProfiles = [
             28 December 2025
         </div>
     </div>,
-    extraContent: 
+    extraContent:
     <div className=''>
         <CardLayout
             title={'Our bio'}
@@ -51,7 +56,7 @@ const sampleProfiles = [
             Simple hearts, endless giggles~
           </div>
           <div>
-            <VideoPlayer video={video} thumbnail={bg3} />
+            <VideoPlayer video={video} thumbnail={videothumb} />
           </div>
         </CardLayout>
         <CardLayout
@@ -353,17 +358,21 @@ export default function CardDeck({ items = sampleProfiles, onSwipe }) {
       {/* profile images with love animation */}
       <div className="relative flex mt-6 z-10 items-center justify-center">
         <motion.div
-          className="rounded-md w-[120px] h-[160px] bg-zinc-100 flex items-center justify-center mr-6"
+          className="rounded-xl w-[120px] h-[160px] bg-zinc-100 flex items-center justify-center mr-6 overflow-hidden"
           initial={{ x: -150, rotate: -40, translateX:-40 }}
-          animate={{ x: 0, rotate: -20,translateX: 30 }}
+          animate={{ x: 0, rotate: -20,translateX: 20 }}
           transition={{ type: "spring", stiffness: 120, damping: 10 }}
-        />
+        >
+          <img src={splitYohana} alt="" />
+        </motion.div>
         <motion.div
-          className="rounded-md w-[120px] h-[160px] bg-zinc-100 flex items-center justify-center ml-6"
+          className="rounded-xl w-[120px] h-[160px] bg-zinc-100 flex items-center justify-center ml-6 overflow-hidden"
           initial={{ x: 150, rotate: 40, translateX: 40 }}
-          animate={{ x: 0, rotate: 20, translateX:-30 }}
+          animate={{ x: 0, rotate: 20, translateX:-20 }}
           transition={{ type: "spring", stiffness: 120, damping: 10 }}
-        />
+        >
+          <img src={splitLius} alt="" />
+        </motion.div>
         {/* Love heart in the middle */}
         <motion.div
           className="absolute text-3xl text-yellow-800 bg-primary rounded-full w-[60px] h-[60px] flex items-center justify-center"

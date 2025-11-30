@@ -1,11 +1,14 @@
 import { BrowserRouter } from 'react-router-dom';
 import RouterIndex from './route';
+import { AudioProvider } from './contexts/AudioProvider';
 
 function App() {
 return (
-  <BrowserRouter>
-      <RouterIndex />
-  </BrowserRouter>
+  <AudioProvider>
+    <BrowserRouter>
+        <RouterIndex />
+    </BrowserRouter>
+  </AudioProvider>
 )
 }
 
