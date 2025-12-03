@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
-import bg1 from "../assets/bg1.jpg";
-import bg2 from "../assets/bg2.jpg";
+import bg1 from "../assets/mom1.webp";
+import bg2 from "../assets/mom2.webp";
+import bg3 from "../assets/mom3.webp";
+import bg4 from "../assets/mom4.webp";
+import bg5 from "../assets/mom5.webp";
+
 
 const BgSlider = () => {
   const [index, setIndex] = useState(0);
-  const imgList = [bg1, bg2];
+  const imgList = [bg1, bg2,bg3,bg4,bg5];
 
   useEffect(() => {
     const interval = setInterval(() => {
