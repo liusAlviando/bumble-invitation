@@ -4,36 +4,18 @@ import soundtrack from "../assets/soundtrack.mp3";
 export const AudioContextReact = createContext(null);
 
 export const AudioProvider = ({ children }) => {
-    const audioRef = useRef(new Audio(soundtrack)); // preload soundtrack
+    const audioRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const [duration, setDuration] = useState(0);
 
-    const audio = audioRef.current;
-
-    /** Always play the same soundtrack */
-    const play = () => {
-        if (audio.src !== soundtrack) {
-            audio.src = soundtrack;
-            audio.volume = 0.35;
-        }
-        audio.play();
-        setIsPlaying(true);
-    };
-
-    /** Pause */
-    const pause = () => {
-        audio.pause();
-        setIsPlaying(false);
-    };
-
-    /** Toggle play/pause */
-    const toggle = () => {
-        isPlaying ? pause() : play();
-    };
-
-    /** Update listeners */
+    /** Initialize only once */
     useEffect(() => {
+        audioRef.current = new Audio(soundtrack);
+        audioRef.current.volume = 0.35;
+
+        const audio = audioRef.current;
+
         const updateProgress = () => setProgress(audio.currentTime);
         const updateDuration = () => setDuration(audio.duration);
 
@@ -42,10 +24,31 @@ export const AudioProvider = ({ children }) => {
         audio.addEventListener("ended", () => setIsPlaying(false));
 
         return () => {
+            audio.pause();
             audio.removeEventListener("timeupdate", updateProgress);
             audio.removeEventListener("loadedmetadata", updateDuration);
         };
     }, []);
+
+    const play = () => {
+        const audio = audioRef.current;
+        if (!audio) return;
+
+        audio.play();
+        setIsPlaying(true);
+    };
+
+    const pause = () => {
+        const audio = audioRef.current;
+        if (!audio) return;
+
+        audio.pause();
+        setIsPlaying(false);
+    };
+
+    const toggle = () => {
+        isPlaying ? pause() : play();
+    };
 
     return (
         <AudioContextReact.Provider

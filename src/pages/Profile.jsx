@@ -41,7 +41,7 @@ const Profile = () => {
                 </div>
                 <div className="flex flex-col justify-center">
                     <div className="font-[600]">Yohana Merina</div>
-                    <div className="text-sm">29 July 1998</div>
+                    <div className="text-sm">19 May 2000</div>
                 </div>
             </div>
 

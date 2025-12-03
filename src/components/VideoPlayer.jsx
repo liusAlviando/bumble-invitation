@@ -1,10 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { useAudioPlayer } from "../hooks/useAudioPlayer";
 
 export default function VideoPlayer({ video, thumbnail }) {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const { play, pause } = useAudioPlayer()
 
   const handlePlayClick = async () => {
     const video = videoRef.current;
@@ -18,7 +20,7 @@ export default function VideoPlayer({ video, thumbnail }) {
     if (video.requestFullscreen) await video.requestFullscreen();
     else if (video.webkitRequestFullscreen) await video.webkitRequestFullscreen();
     else if (video.msRequestFullscreen) await video.msRequestFullscreen();
-  
+    pause()
     // Make sure aspect ratio is preserved
     video.style.objectFit = "contain"; // instead of "cover"
   };
@@ -33,6 +35,7 @@ export default function VideoPlayer({ video, thumbnail }) {
       document.msFullscreenElement;
 
     if (!isFullscreen) {
+      play();
       video.pause();
       setIsPlaying(false);
     }

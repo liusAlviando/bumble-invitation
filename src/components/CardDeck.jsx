@@ -12,19 +12,24 @@ import VideoPlayer from './VideoPlayer';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import splitLius from '../assets/splitlius.webp'
-import splitYohana from '../assets/splityohana.webp'
-const CardLayout = ({title,children}) =>{
+import splitYohana from '../assets/splityohana.png'
+import { twMerge } from 'tailwind-merge';
+const CardLayout = ({title,children,className}) =>{
     return(
-        <div className='shadow-lg rounded-xl p-2 mt-2'>
+        <div className={
+          twMerge('shadow-lg rounded-xl p-2 mt-2',className)
+        }>
             <div className='font-[600] mb-2'>{title}</div>
             <div>{children}</div>
         </div>
     )
 }
 
-const Pill = ({children}) =>{
+const Pill = ({children,className}) =>{
     return(
-        <div className='text-sm rounded-full border-1 border-zinc-500 px-2 py-1'>
+        <div className={
+          twMerge('text-sm rounded-full border-1 border-zinc-500 px-2 py-1',className)
+        }>
             <div>{children}</div>
         </div>
     )
@@ -87,6 +92,7 @@ const sampleProfiles = [
         </CardLayout>
         <CardLayout
             title={'Our Story'}
+            className={'bg-primary'}
         >
             Yes, we met in Bumble!
             We never expected that one simple swipe on Bumble would lead us here. At first, it was just two strangers sending messages on a screen until the conversation stopped being small talk and turned into “wait… why do you think exactly like me?”
@@ -358,7 +364,7 @@ export default function CardDeck({ items = sampleProfiles, onSwipe }) {
       {/* profile images with love animation */}
       <div className="relative flex mt-6 z-10 items-center justify-center">
         <motion.div
-          className="rounded-xl w-[120px] h-[160px] bg-zinc-100 flex items-center justify-center mr-6 overflow-hidden"
+          className="rounded-xl w-[120px] h-[160px] flex items-center justify-center mr-6 overflow-hidden"
           initial={{ x: -150, rotate: -40, translateX:-40 }}
           animate={{ x: 0, rotate: -20,translateX: 20 }}
           transition={{ type: "spring", stiffness: 120, damping: 10 }}
@@ -366,12 +372,12 @@ export default function CardDeck({ items = sampleProfiles, onSwipe }) {
           <img src={splitYohana} alt="" />
         </motion.div>
         <motion.div
-          className="rounded-xl w-[120px] h-[160px] bg-zinc-100 flex items-center justify-center ml-6 overflow-hidden"
+          className="rounded-xl w-[120px] h-[160px]  flex items-center justify-center ml-6 overflow-hidden"
           initial={{ x: 150, rotate: 40, translateX: 40 }}
           animate={{ x: 0, rotate: 20, translateX:-20 }}
           transition={{ type: "spring", stiffness: 120, damping: 10 }}
         >
-          <img src={splitLius} alt="" />
+          <img height={'110%'} src={splitLius} alt="" />
         </motion.div>
         {/* Love heart in the middle */}
         <motion.div

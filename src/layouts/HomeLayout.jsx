@@ -1,5 +1,5 @@
 import { faCompass, faHeart, faMessage, faUser } from "@fortawesome/free-regular-svg-icons"
-import { faGift, faPause, faPlay } from "@fortawesome/free-solid-svg-icons"
+import { faGift, faPause, faPlay, faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link, Outlet } from "react-router-dom"
 import logo_bumble from '../assets/logo-bumble.png'
@@ -34,7 +34,7 @@ const HomeLayout = () => {
               </div>
               
               <div onClick={toggle} to={'/present'} className="cursor-pointer">
-                <FontAwesomeIcon className="text-[15pt]" icon={isPlaying ? faPause : faPlay}></FontAwesomeIcon>
+                <FontAwesomeIcon className="text-[15pt]" icon={isPlaying ? faVolumeMute : faVolumeUp}></FontAwesomeIcon>
               </div>
             </div>
             <div className="h-full">
