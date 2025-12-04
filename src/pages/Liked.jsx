@@ -34,7 +34,7 @@ const Liked = () => {
   }, []);
 
   return (
-    <div className="px-4 pt-2 space-y-5">
+    <div className="px-4 pt-2 space-y-5 overflow-y-scroll h-screen ">
         <Link to={'/chats'}>
             <div className="bg-primary p-3 mb-3 rounded-xl">
                 <h1 className="">Click here to send us your wishes!</h1>
@@ -54,7 +54,7 @@ const Liked = () => {
       )}
 
       {/* 💌 List */}
-      <div className="space-y-3">
+      <div className="space-y-3  pb-[140px]">
         <AnimatePresence>
           {data.map((item, i) => (
             <motion.div
